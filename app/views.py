@@ -1,5 +1,5 @@
 from app.models import FacebookUser
-from app.bot import *
+from app.bot import FBChatbot as bot
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
