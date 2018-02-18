@@ -1,6 +1,7 @@
 from app.models import FacebookUser
 from django.http.response import HttpResponse
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
 from django.views import generic
 from pymessenger.bot import Bot
 
@@ -12,6 +13,10 @@ class FBWebhook(generic.View):
     # Set challenge key as environment variable and set it here
     challenge_key = os.environ['CHALLENGE_KEY']
     bot = Bot(os.environ['FB_ACCESS_TOKEN'])
+
+    @method_decorator(csrf_exempt)
+	def dispatch(self, request, *args, **kwargs):
+		return generic.View.dispatch(self, request, *args, **kwargs)
 
     # Register user for the first time
     def register_user(self, messenger_id):
@@ -32,6 +37,7 @@ class FBWebhook(generic.View):
     def post(self, request, *args, **kwargs):
         
         incoming_message = json.loads(self.request.body.decode('utf-8'))
+        print(incoming_message)
 
         try:
             # Iterate over incoming message for each entry
