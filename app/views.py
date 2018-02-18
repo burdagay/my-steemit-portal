@@ -1,5 +1,5 @@
 from app.models import FacebookUser
-from app.bot import FBChatbot as bot
+from app.bot import FBChatbot
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
@@ -13,6 +13,7 @@ class FBWebhook(generic.View):
 
     # Set challenge key as environment variable and set it here
     challenge_key = os.environ['CHALLENGE_KEY']
+    bot = FBChatbot()
     
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -60,7 +61,7 @@ class FBWebhook(generic.View):
                         elif 'text' in message['message']:
                             self.register_user(sender)
                             text = message['message']['text']                           
-                            bot.send_text_message(sender, "Echo: {}".format(text))
+                            self.bot.send_text_message(sender, "Echo: {}".format(text))
 
         except Exception as ex:
             # Print for debugging
