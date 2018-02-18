@@ -1,0 +1,1 @@
+web: gunicorn my_steem_porta.wsgi --log-file -

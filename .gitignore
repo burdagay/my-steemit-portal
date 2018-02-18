@@ -100,13 +100,5 @@ ENV/
 # mypy
 .mypy_cache/
 
-# SQLite
-db.sqlite3
-
-# Static files
-static/
-static/files
-
 # Heroku files
-Procfile
 *.pyc
