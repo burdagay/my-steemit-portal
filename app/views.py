@@ -46,10 +46,10 @@ class FBWebhook(generic.View):
                 for message in entry['messaging']:
                     # Get sender of message and register it
                     sender = message['sender']['id']
-                    self.register_user(sender)
 
                     # Check if message is a postback
-                    if 'postback' in message:                        
+                    if 'postback' in message:
+                        self.register_user(sender)                 
                         pass
 
                     # Check if a message is just an ordinary message
@@ -59,6 +59,7 @@ class FBWebhook(generic.View):
                             pass
 
                         elif 'text' in message['message']:
+                            self.register_user(sender)
                             text = message['message']['text']                           
                             self.bot.send_text_message(sender, "Echo: {}".format(text))
 
