@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# 
 class MetaInfo(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
@@ -17,4 +18,4 @@ class FacebookUser(MetaInfo):
         verbose_name_plural = "Facebook Users"
 
     def __str__(self):
-        return "{} {} ({})".format(self.first_name, self.last_name, self.gender)
+        return "{} {}".format(self.steem_username, self.messenger_id)
