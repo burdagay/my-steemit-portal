@@ -1,9 +1,14 @@
 from app.models import FacebookUser
 from pymessenger.bot import Bot
-import os
+import os, requests
 
 class FBChatbot:
     fb_api = Bot(os.environ['FB_ACCESS_TOKEN'])
+
+    def get_user(self, username):
+        url = "https://steemit.com/@{}.json".format(username)
+        response = requests.get(url)
+        return response.json()
 
     # Register user for the first time
     def register_user(self, messenger_id):
