@@ -60,7 +60,7 @@ class FBWebhook(generic.View):
 
                         elif 'text' in message['message']:
                             text = message['message']['text']                           
-                            bot.send_text_message(sender, "Echo: {}".format(text))
+                            self.bot.send_text_message(sender, "Echo: {}".format(text))
 
         except Exception as ex:
             # Print for debugging
