@@ -2,6 +2,7 @@ from app.models import FacebookUser
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.views import generic
+from pymessenger.bot import Bot
 
 import os, json
 
@@ -10,6 +11,7 @@ class FBWebhook(generic.View):
 
     # Set challenge key as environment variable and set it here
     challenge_key = os.environ['CHALLENGE_KEY']
+    bot = Bot(os.environ['FB_ACCESS_TOKEN'])
 
     # Register user for the first time
     def register_user(self, messenger_id):
@@ -46,11 +48,12 @@ class FBWebhook(generic.View):
                     # Check if a message is just an ordinary message
                     elif 'message' in message:
                         
-                        if "is_echo" in message['message']:
+                        if 'is_echo' in message['message']:
                             pass
 
-                        elif "text" in message['message']:	
-                            pass
+                        elif 'text' in message['message']:
+                            text = message['message']['text']                           
+                            bot.send_text_message(sender, "Echo: {}".format(text))
 
         except Exception as ex:
             # Print for debugging
