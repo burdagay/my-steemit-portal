@@ -1,10 +1,10 @@
 from app.models import FacebookUser
+from app.bot import *
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
-from pymessenger.bot import Bot
 
 import os, json
 
@@ -13,7 +13,6 @@ class FBWebhook(generic.View):
 
     # Set challenge key as environment variable and set it here
     challenge_key = os.environ['CHALLENGE_KEY']
-    bot = Bot(os.environ['FB_ACCESS_TOKEN'])
     
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -61,7 +60,7 @@ class FBWebhook(generic.View):
                         elif 'text' in message['message']:
                             self.register_user(sender)
                             text = message['message']['text']                           
-                            self.bot.send_text_message(sender, "Echo: {}".format(text))
+                            bot.send_text_message(sender, "Echo: {}".format(text))
 
         except Exception as ex:
             # Print for debugging
