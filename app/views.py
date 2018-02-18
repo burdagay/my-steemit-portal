@@ -64,6 +64,6 @@ class FBWebhook(generic.View):
 
         except Exception as ex:
             # Print for debugging
-            print (e)
+            print (ex)
         
         return HttpResponse()
