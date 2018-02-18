@@ -15,8 +15,8 @@ class FBWebhook(generic.View):
     bot = Bot(os.environ['FB_ACCESS_TOKEN'])
 
     @method_decorator(csrf_exempt)
-	def dispatch(self, request, *args, **kwargs):
-		return generic.View.dispatch(self, request, *args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        return generic.View.dispatch(self, request, *args, **kwargs)
 
     # Register user for the first time
     def register_user(self, messenger_id):
