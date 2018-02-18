@@ -22,7 +22,7 @@ class FBWebhook(generic.View):
     # Register user for the first time
     def register_user(self, messenger_id):
         # Check if user exists, if not create new Facebook user entry
-        if FacebookUser.objects.get(messenger_id=messenger_id).exists():
+        if FacebookUser.objects.filter(messenger_id=messenger_id).exists():
             fb_user = FacebookUser(messenger_id=messenger_id)
             fb_user.save()
 
