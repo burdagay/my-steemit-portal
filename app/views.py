@@ -3,6 +3,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import generic
+from django.views.decorators.csrf import csrf_exempt
 from pymessenger.bot import Bot
 
 import os, json
@@ -13,7 +14,7 @@ class FBWebhook(generic.View):
     # Set challenge key as environment variable and set it here
     challenge_key = os.environ['CHALLENGE_KEY']
     bot = Bot(os.environ['FB_ACCESS_TOKEN'])
-
+    
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return generic.View.dispatch(self, request, *args, **kwargs)
