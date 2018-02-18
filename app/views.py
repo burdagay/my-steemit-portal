@@ -1,4 +1,3 @@
-from app.models import FacebookUser
 from app.bot import FBChatbot
 from django.http.response import HttpResponse
 from django.shortcuts import render
@@ -18,13 +17,6 @@ class FBWebhook(generic.View):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return generic.View.dispatch(self, request, *args, **kwargs)
-
-    # Register user for the first time
-    def register_user(self, messenger_id):
-        # Check if user exists, if not create new Facebook user entry
-        if not FacebookUser.objects.filter(messenger_id=messenger_id).exists():
-            fb_user = FacebookUser(messenger_id=messenger_id)
-            fb_user.save()
 
     # Facebook endpoint to verify challenge key    
     def get(self, request, *args, **kwargs):
@@ -48,8 +40,7 @@ class FBWebhook(generic.View):
                     sender = message['sender']['id']
 
                     # Check if message is a postback
-                    if 'postback' in message:
-                        self.register_user(sender)                 
+                    if 'postback' in message:            
                         pass
 
                     # Check if a message is just an ordinary message
@@ -59,7 +50,6 @@ class FBWebhook(generic.View):
                             pass
 
                         elif 'text' in message['message']:
-                            self.register_user(sender)
                             text = message['message']['text']                           
                             self.bot.send_text_message(sender, "Echo: {}".format(text))
 
