@@ -19,4 +19,5 @@ class FBChatbot:
 
 
     def send_text_message(self, messenger_id, message):
-        self.fb_api.send_text_message(sender, "Echo: {}".format(message))
+        data = {"attachment":{"type":"template","payload":{"template_type":"button","text":"What do you want to do next?","buttons":[{"type":"web_url","url":"https://arcane-ravine-23049.herokuapp.com/app/wallet","title":"Visit Messenger"}]}}}
+        self.fb_api.send_button_message(messenger_id, data)
