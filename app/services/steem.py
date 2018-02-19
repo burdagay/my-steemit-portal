@@ -2,6 +2,7 @@ import json, math, requests
 from app import constants as CONST
 from steem import Steem
 from steem.converter import Converter
+from steem.account import Account
 
 class SteemHelper:
     
@@ -24,8 +25,8 @@ class SteemHelper:
         return "({})".format(str(math.floor((math.log10(reputation)-9) * 9 + 25)))
     
     def get_steem_power(self, vests):
+        vests = float(vests.replace('VESTS',''))
         return round(self.c.vests_to_sp(vests),2)
 
     def get_voting_power(self, vp):
-        vp = float(vp)
         return "{}%".format(round(vp/100,2))
