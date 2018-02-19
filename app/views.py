@@ -3,17 +3,22 @@ from django.shortcuts import render
 from app.services.steem import SteemHelper
 import math
 
-def view_wallet(request):    
-    print("*************************************************")
-    SteemHelper.get_steem_power()
-    print("*************************************************")
+steem = SteemHelper()
+
+def view_wallet(request):
+    username = request.GET.get('username')
+    user = steem.get_account(username)
+
     context = {
-        "username":"test",
-        "prof_pic":"https://i.imgur.com/VWhcfje.jpg",
-        "name":"brybry",
-        "location":"Cebu Philippines",
-        "about":"test, test, test, test",
-        "date_joined":parser.parse("2018-01-10T14:06:03"),
-        "reputation": "({})".format(str(math.floor((math.log10(1307082472302)-9) * 9 + 25)))
+        'username':username,
+        'prof_pic':user['json_metadata']['profile']['profile_image'],
+        'name':user['name'],
+        'location':user['json_metadata']['profile']['location'],
+        'about':user['json_metadata']['profile']['about'],
+        'date_joined':parser.parse(user['created']),
+        'reputation': steem.get_reputation(user['reputation']),
+        'last_update':parser.parse(user['last_account_update']),
+        'post_count':user['post_count'],
+        'voting_power':steem.get_voting_power(user['voting_power']),
     }
     return render(request, 'app/wallet.html', context)
