@@ -3,6 +3,7 @@ from django.shortcuts import render
 from app.services.steem import SteemHelper
 import math
 
+
 steem = SteemHelper()
 
 def view_wallet(request):
