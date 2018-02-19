@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from app.bot import FBChatbot
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'app/', include("app.urls")),
 ]
+
+bot = FBChatbot()
+bot.init_bot()
