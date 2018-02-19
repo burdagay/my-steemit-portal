@@ -16,7 +16,7 @@
     .w3-twothird{width:100%!important;}
     .text-center{text-align:center!important;}
     table{width:100%}
-    td.title{width:60%}
+    td.title{width:50%}
 </style>
 <body class="w3-light-grey">
     <div class="w3-content w3-margin-top" style="max-width:1400px;">
@@ -96,6 +96,30 @@
                   </table>
                 </p>
               <hr>
+            </div>
+            <div class="w3-container w3-text-gray">
+                <h6><b>Pending</b></h6>
+                <p>
+                  <table>
+                    <tr>
+                      <td class="title"><b>Total Pending:</b></td>
+                      <td>{{ pending_payout }}</td>
+                    </tr>
+                    <tr>
+                      <td class="title"><b>Curator Payout:</b></td>
+                      <td>{{ curator_payout }}</td>
+                    </tr>
+                    <tr>
+                        <td class="title"><b>Promoted:</b></td>
+                        <td>{{ total_promoted }}</td>
+                      </tr>
+                    <tr>
+                      <td class="title"><b>Total Payout:</b></td>
+                      <td>{{ total_payout }}</td>
+                    </tr>
+                  </table>
+                </p>
+                <hr>
             </div>
           </div>
         </div>
