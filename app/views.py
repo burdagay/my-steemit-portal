@@ -10,13 +10,26 @@ def view_wallet(request):
     user = steem.get_account(username)
     follow_cnt = steem.get_follow_count(username)
     payout = steem.get_payout(username)
+    profile = user['json_metadata']['profile']
+    prof_pic = ""
+    location = ""
+    about = ""
+    
+    if 'profile_image' in profile: 
+        prof_pic = profile['profile_image']
+
+    if 'location' in profile:
+        location = profile['location']
+
+    if 'about' in profile:
+        about = profile['about']
 
     context = {
         'username':username,
-        'prof_pic':user['json_metadata']['profile']['profile_image'],
+        'prof_pic':prof_pic, 
         'name':user['name'],
-        'location':user['json_metadata']['profile']['location'],
-        'about':user['json_metadata']['profile']['about'],
+        'location':location,
+        'about':about,
         'date_joined':parser.parse(user['created']),
         'reputation': steem.get_reputation(user['reputation']),
         'last_update':parser.parse(user['last_account_update']),
