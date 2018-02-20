@@ -41,10 +41,10 @@ class SteemHelper:
         total_promoted = round(total_promoted, 2)
 
         result = {
-            'total_pending':"{} SP".format(total_pending),
-            'total_payout':"{} SP".format(total_payout),
-            'total_cur_payout':"{} SP".format(total_cur_payout),
-            'total_promoted':"{} SP".format(total_promoted)
+            'total_pending':"{} SBD".format(total_pending),
+            'total_payout':"{} SBD".format(total_payout),
+            'total_cur_payout':"{} SBD".format(total_cur_payout),
+            'total_promoted':"{} SBD".format(total_promoted)
         }
 
         return result
