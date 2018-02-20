@@ -46,7 +46,7 @@ class FBChatbot:
 
                 else:
                     # If not, send incorrect username message
-                    self.fb_api.send_text(messenger_id, CONST.MESSAGE_INCORRECT_STEEM_USERNAME)
+                    self.fb_api.send_text_message(messenger_id, CONST.MESSAGE_INCORRECT_STEEM_USERNAME)
                     # End function to not delete context
                     return
 
@@ -55,7 +55,7 @@ class FBChatbot:
 
         
         if intent == CONST.PAYLOAD_GET_STARTED:
-            self.fb_api.send_text(messenger_id, CONST.MESSAGE_WELCOME)
+            self.fb_api.send_text_message(messenger_id, CONST.MESSAGE_WELCOME)
             context = Context(messenger_id=messenger_id, context=CONST.CONTEXT_ASK_USERNAME)
             context.save()
 
