@@ -30,7 +30,6 @@ class FBWebhook(generic.View):
     def post(self, request, *args, **kwargs):
         
         incoming_message = json.loads(self.request.body.decode('utf-8'))
-        print(incoming_message)
 
         try:
             # Iterate over incoming message for each entry
@@ -38,10 +37,13 @@ class FBWebhook(generic.View):
                 for message in entry['messaging']:
                     # Get sender of message and register it
                     sender = message['sender']['id']
+                    print(sender)
 
                     # Check if message is a postback
-                    if 'postback' in message:            
-                        pass
+                    if 'postback' in message:
+                        self.bot.register_user(sender)
+                        text = message['postback']['payload']
+                        self.bot.parse_intent(sender, text)
 
                     # Check if a message is just an ordinary message
                     elif 'message' in message:
@@ -50,8 +52,9 @@ class FBWebhook(generic.View):
                             pass
 
                         elif 'text' in message['message']:
-                            text = message['message']['text']                           
-                            self.bot.send_text_message(sender, "Echo: {}".format(text))
+                            self.bot.register_user(sender)
+                            text = message['message']['text']
+                            self.bot.parse_intent(sender, text)
 
         except Exception as ex:
             # Print for debugging
