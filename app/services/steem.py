@@ -51,8 +51,11 @@ class SteemHelper:
         
 
     def get_account(self, username):
-        a = self.s.get_account(username)
-        a['json_metadata'] = json.loads(a['json_metadata'])
+        try:
+            a = self.s.get_account(username)
+            a['json_metadata'] = json.loads(a['json_metadata'])
+        except:
+            return None
         return a
 
     def get_follow_count(self, username):
