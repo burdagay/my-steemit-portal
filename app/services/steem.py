@@ -15,7 +15,7 @@ class SteemHelper:
 
     def get_payout(self, username):
         b = Blog(username)
-        posts = b.all()
+        posts = b.take(50)
         total_pending = 0
         total_payout = 0
         total_cur_payout = 0
