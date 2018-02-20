@@ -30,6 +30,7 @@ class FBWebhook(generic.View):
     def post(self, request, *args, **kwargs):
         
         incoming_message = json.loads(self.request.body.decode('utf-8'))
+        print(incoming_message)
 
         try:
             # Iterate over incoming message for each entry
@@ -37,7 +38,6 @@ class FBWebhook(generic.View):
                 for message in entry['messaging']:
                     # Get sender of message and register it
                     sender = message['sender']['id']
-                    print(sender)
 
                     # Check if message is a postback
                     if 'postback' in message:
