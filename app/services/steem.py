@@ -13,9 +13,22 @@ class SteemHelper:
     set_shared_steemd_instance(s)
     c = Converter()    
 
+    def get_history(self, username):
+        a = Account(username)
+        history = a.history_reverse()
+        count = 1
+
+        for item in history:
+            if count > 3:
+                break
+            print(item)
+            count = count + 1
+
+
+
     def get_payout(self, username):
         b = Blog(username)
-        posts = b.take(50)
+        posts = b.take(1)
         total_pending = 0
         total_payout = 0
         total_cur_payout = 0

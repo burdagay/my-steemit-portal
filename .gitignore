@@ -102,3 +102,6 @@ ENV/
 
 # Heroku files
 *.pyc
+
+# SQLite
+db.sqlite3
