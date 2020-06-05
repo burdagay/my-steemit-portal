@@ -4,7 +4,7 @@ certifi==2017.7.27.1
 chardet==3.0.4
 dateparser==0.6.0
 diff-match-patch==20121119
-Django==2.0.2
+Django==2.2.13
 ecdsa==0.13
 funcy==1.9.1
 gunicorn==19.7.1
