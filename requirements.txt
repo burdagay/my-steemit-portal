@@ -1,6 +1,6 @@
 appdirs==1.4.3
 bytestring==0.0.1
-certifi==2017.7.27.1
+certifi==2022.12.7
 chardet==3.0.4
 dateparser==0.6.0
 diff-match-patch==20121119
